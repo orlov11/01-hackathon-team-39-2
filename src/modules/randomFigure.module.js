@@ -12,10 +12,10 @@ export class RandomFigure extends Module {
         setTimeout(() => figure.remove(), 200);
     }
     
-    circleRun()
+    figureRun()
     }
 }
-function circleRun(){
+function figureRun(){
     const el = renderFigure()
     document.body.appendChild(el);
 } 
