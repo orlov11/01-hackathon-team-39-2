@@ -4,61 +4,38 @@ import './clicks-styles.css'
 export class ClicksModule extends Module {
     constructor(type, text) {
         super(type, text)
+        this.duration = 10000
+        this.singleClicks = 0
+        this.doubleClicks = 0
     }
+
     trigger() {
-        const duration = 10000
         const startTime = Date.now()
-
         const infoBlock = document.createElement('div')
-        infoBlock.className = 'info-block'
-        infoBlock.textContent = 'Click anywhere!'
-        document.body.append(infoBlock)
+        const interval_id = this.renderInfoBlock(infoBlock)
+        this.renderStatusBlock(infoBlock, interval_id)
 
-        const my_set_interval_id = setInterval(() => {
-            if (infoBlock.classList.contains('hide')) {
-                infoBlock.classList.remove('hide')
-            } else {
-                infoBlock.classList.add('hide')
-            }
-        }, 200)
+        const singleClickCounterBlock = this.renderCounterBlock('Single clicks')
+        const singleClickNumber = this.renderClickNumber(singleClickCounterBlock)
 
-        const timeStatusBlock = document.createElement('div')
-        timeStatusBlock.className = 'time-status'
-        timeStatusBlock.textContent = 'Counting clicks...'
-        document.body.append(timeStatusBlock)
-        setTimeout(() => {
-            timeStatusBlock.textContent = 'Finished'
-            clearInterval(my_set_interval_id)
-            infoBlock.classList.add('hide')
-        }, duration)
+        const doubleClickCounterBlock = this.renderCounterBlock('Double clicks')
+        const doubleClickNumber = this.renderClickNumber(doubleClickCounterBlock)
 
-        let singleClicks = 0
-        let doubleClicks = 0
         let isSingleClick = false
-
-        const singleClickCounterBlock = this.rendeCounterBlock('Single clicks')
-        const singleClickNumberBlock = singleClickCounterBlock.querySelector('b')
-        singleClickNumberBlock.textContent = singleClicks
-        document.body.append(singleClickCounterBlock)
-
-        const doubleClickCounterBlock = this.rendeCounterBlock('Double clicks')
-        const doubleClickNumberBlock = doubleClickCounterBlock.querySelector('b')
-        doubleClickNumberBlock.textContent = doubleClicks
-        document.body.append(doubleClickCounterBlock)
 
         document.addEventListener('click', () => {
             const clickTime = Date.now()
-            if (clickTime - startTime < duration) {
+            if (clickTime - startTime < this.duration) {
                 isSingleClick = !isSingleClick
                 setTimeout(() => {
                     if (isSingleClick) {
-                        singleClicks += 1
-                        singleClickNumberBlock.textContent = singleClicks
+                        this.singleClicks += 1
+                        singleClickNumber.textContent = this.singleClicks
                         isSingleClick = !isSingleClick
                     } else {
-                        doubleClicks += 1
-                        if (doubleClicks % 2 === 0) {
-                            doubleClickNumberBlock.textContent = doubleClicks / 2
+                        this.doubleClicks += 1
+                        if (this.doubleClicks % 2 === 0) {
+                            doubleClickNumber.textContent = this.doubleClicks / 2
                         }
                     }
                 }, 200)
@@ -66,10 +43,43 @@ export class ClicksModule extends Module {
         })
     }
 
-    rendeCounterBlock(text) {
+    renderInfoBlock(block) {
+        block.className = 'info-block'
+        block.textContent = 'Click anywhere!'
+        document.body.append(block)
+        const interval_id = setInterval(() => {
+            if (block.classList.contains('hide')) {
+                block.classList.remove('hide')
+            } else {
+                block.classList.add('hide')
+            }
+        }, 200)
+        return interval_id
+    }
+
+    renderStatusBlock(infoBlock, interval_id) {
+        const statusBlock = document.createElement('div')
+        statusBlock.className = 'time-status'
+        statusBlock.textContent = 'Counting clicks...'
+        document.body.append(statusBlock)
+        setTimeout(() => {
+            statusBlock.textContent = 'Finished'
+            clearInterval(interval_id)
+            infoBlock.classList.add('hide')
+        }, this.duration)
+    }
+
+    renderCounterBlock(text) {
         const block = document.createElement('div')
         block.className = 'clicks-counter'
         block.innerHTML = `${text}: <b></b>`
         return block
+    }
+
+    renderClickNumber(parentBlock) {
+        const childBlock = parentBlock.querySelector('b')
+        childBlock.textContent = '0'
+        document.body.append(parentBlock)
+        return childBlock
     }
 }

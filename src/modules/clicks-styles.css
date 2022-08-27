@@ -4,6 +4,7 @@
   margin: 0 auto;
   color: hsl(40, 100%, 50%);
   padding: 1em 0;
+  user-select: none;
 }
 
 .clicks-counter {
@@ -13,6 +14,7 @@
   margin: 0 auto;
   color: hsl(170, 50%, 40%);
   width: fit-content;
+  user-select: none;
 }
 
 .info-block {
