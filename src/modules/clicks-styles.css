@@ -1,0 +1,14 @@
+.time-status {
+    font-size: 2em;
+    text-align: center;
+    margin: 0 auto;
+    color: hsl(40, 100%, 50%);
+    padding: 1em 0;
+  }
+  
+  .clicks-counter {
+    font-size: 1.5em;
+    text-align: center;
+    margin: 0 auto;
+    color: hsl(170, 50%, 40%);
+  }
