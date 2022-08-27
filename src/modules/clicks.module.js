@@ -6,6 +6,7 @@ export class ClicksModule extends Module {
         super(type, text)
     }
     trigger() {
+        const duration = 10000
         const startTime = Date.now()
 
         const infoBlock = document.createElement('div')
@@ -29,7 +30,7 @@ export class ClicksModule extends Module {
             timeStatusBlock.textContent = 'Finished'
             clearInterval(my_set_interval_id)
             infoBlock.classList.add('hide')
-        }, 10000)
+        }, duration)
 
         let singleClicks = 0
         let doubleClicks = 0
@@ -47,7 +48,7 @@ export class ClicksModule extends Module {
 
         document.addEventListener('click', () => {
             const clickTime = Date.now()
-            if (clickTime - startTime < 10000) {
+            if (clickTime - startTime < duration) {
                 isSingleClick = !isSingleClick
                 setTimeout(() => {
                     if (isSingleClick) {
