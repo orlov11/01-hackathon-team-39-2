@@ -1,16 +1,8 @@
 import {Module} from '../core/module'
 import {random} from "../utils"
-export class RandomFigure extends Module {
-  
-    constructor(type, text) {
-        super(type, text);
-    }  
 
-    trigger() {
-        const figure = document.querySelector(".figure")
-        if (figure) {
-        setTimeout(() => figure.remove(), 200);
-        }
+export class RandomFigure extends Module {
+    static renderFigure() {
         const width = window.innerWidth;
         const height = window.innerHeight;
         let size = (50 + 50 * Math.random()) | 0;
@@ -23,6 +15,20 @@ export class RandomFigure extends Module {
         div.style.backgroundColor = `rgb(${random(0,256)}, ${random(0,256)}, ${random(0,256)}`
         div.style.top = Math.random() * (height - size) + 'px';
         div.style.left = Math.random() * (width - size) + 'px';
-        document.body.appendChild(div);
-        }
+        return div;
+      }
+
+    constructor(type, text) {
+        
+        super(type, text);
+    }  
+
+trigger() {
+    const figure = document.querySelector(".figure")
+    if (figure) {
+     setTimeout(() => figure.remove(), 200);
+    }
+    const el = RandomFigure.renderFigure()
+    document.body.appendChild(el);
+    }
 }
