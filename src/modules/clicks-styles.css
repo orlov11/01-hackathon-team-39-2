@@ -1,0 +1,36 @@
+.time-status {
+  font-size: 2em;
+  text-align: center;
+  margin: 0 auto;
+  color: hsl(40, 100%, 50%);
+  padding: 1em 0;
+  user-select: none;
+}
+
+.clicks-counter {
+  padding: 1em 0;
+  font-size: 1.5em;
+  text-align: center;
+  margin: 0 auto;
+  color: hsl(170, 50%, 40%);
+  width: fit-content;
+  user-select: none;
+}
+
+.info-block {
+  position: absolute;
+  bottom: 1em;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: fit-content;
+  padding: 5px;
+  background-color: hsl(302, 78%, 40%);
+  border-radius: 3px;
+  color: white;
+  font-size: 1.2em;
+}
+
+.hide {
+  display: none;
+}
