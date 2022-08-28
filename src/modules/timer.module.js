@@ -39,9 +39,12 @@ export class TimerModule extends Module {
 
     checkEnd(value, interval_id) {
         if (value === 0) {
-            clearInterval(interval_id)
-            this.timerBlock.classList.add('hide')
-            this.renderFinalBlock()
+            this.timerBlock.classList.add('orange-bgr')
+            setTimeout(() => {
+                clearInterval(interval_id)
+                this.timerBlock.classList.add('hide')
+                this.renderFinalBlock()
+            }, 300)
         }
     }
 
@@ -49,6 +52,5 @@ export class TimerModule extends Module {
         this.finalBlock.className = 'final-block'
         this.finalBlock.textContent = 'Таймер успешно завершил работу'
         document.body.append(this.finalBlock)
-        this.finalBlock.classList.add('visible') 
     }
 }
