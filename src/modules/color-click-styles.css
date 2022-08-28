@@ -4,3 +4,17 @@
     width: 5px;
     height: 5px;
 }
+
+.info-block {
+    position: absolute;
+    bottom: 1em;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: fit-content;
+    padding: 5px;
+    background-color: hsl(302, 78%, 40%);
+    border-radius: 3px;
+    color: white;
+    font-size: 1.2em;
+  }

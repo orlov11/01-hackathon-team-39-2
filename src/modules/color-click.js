@@ -4,8 +4,11 @@ import './color-click-styles.css'
 export class ColorClickModule extends Module {
     constructor(type, text) {
         super(type, text)
+        this.infoBlock = document.createElement('div')
     }
     trigger() {
+        this.renderInfoBlock ()
+
         document.addEventListener('click', event => {
             const circle = document.createElement('div')
             const X = event.clientX
@@ -16,6 +19,12 @@ export class ColorClickModule extends Module {
             this.renderCircle(circle, X, Y, radius, color)
             this.growCircle(circle, X, Y, radius)
         })
+    }
+
+    renderInfoBlock() {
+        this.infoBlock.className = 'info-block'
+        this.infoBlock.textContent = 'Click anywhere!'
+        document.body.append(this.infoBlock)
     }
 
     renderCircle(circle, X, Y, radius, color) {
