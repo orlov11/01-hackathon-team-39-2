@@ -1,8 +1,26 @@
 import './styles.css'
 import { ContextMenu } from './menu'
-import { BackgroundModule } from './modules/background.module'
+import {
+	click,
+	backgroun,
+	messege,
+	myTimer,
+	figure,
+	game,
+	sound,
+	encod,
+} from './menu'
 
-const contextMenu = new ContextMenu()
+const menu = new ContextMenu()
 
-contextMenu.callUpMenu()
-contextMenu.runModule()
+menu.add(backgroun.toHTML())
+menu.add(click.toHTML())
+menu.add(messege.toHTML())
+menu.add(myTimer.toHTML())
+menu.add(figure.toHTML())
+menu.add(game.toHTML())
+menu.add(sound.toHTML())
+menu.add(encod.toHTML())
+
+menu.callUpMenu()
+menu.runModule()

@@ -1,34 +1,38 @@
-import {Module} from '../core/module'
-import {random} from "../utils"
+import { Module } from '../core/module'
+import { random } from '../utils'
 
 export class RandomFigure extends Module {
-    static renderFigure() {
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        let size = (50 + 50 * Math.random()) | 0;
-        let div = document.createElement('div');
-        div.classList.add("figure");
-        div.style.position ="absolute" ;
-        div.style.width = random(50, 150) + 'px';
-        div.style.height = random(50, 150) + 'px';
-        div.style.borderRadius = random(1, 50) +'%';
-        div.style.backgroundColor = `rgb(${random(0,256)}, ${random(0,256)}, ${random(0,256)}`
-        div.style.top = Math.random() * (height - size) + 'px';
-        div.style.left = Math.random() * (width - size) + 'px';
-        return div;
-      }
+	constructor(type, text) {
+		super(type, text)
+	}
 
-    constructor(type, text) {
-        
-        super(type, text);
-    }  
+	renderFigure() {
+		this.width = window.innerWidth
+		this.height = window.innerHeight
+		this.size = (50 + 50 * Math.random()) | 0
+		this.div = document.createElement('div')
+		this.div.classList.add('figure')
+		this.div.style.position = 'absolute'
+		this.div.style.width = random(50, 150) + 'px'
+		this.div.style.height = random(50, 150) + 'px'
+		this.div.style.borderRadius = random(1, 50) + '%'
+		this.div.style.backgroundColor = `rgb(${random(0, 256)}, ${random(
+			0,
+			256,
+		)}, ${random(0, 256)}`
+		this.div.style.top = Math.random() * (this.height - this.size) + 'px'
+		this.div.style.left = Math.random() * (this.width - this.size) + 'px'
+		return this.div
+	}
 
-trigger() {
-    const figure = document.querySelector(".figure")
-    if (figure) {
-     setTimeout(() => figure.remove(), 200);
-    }
-    const el = RandomFigure.renderFigure()
-    document.body.appendChild(el);
-    }
+	trigger() {
+		const figure = document.querySelector('.figure')
+		if (figure) {
+			setTimeout(() => figure.remove(), 200)
+		}
+
+		const el = this.renderFigure()
+		document.body.appendChild(el)
+		setTimeout(() => el.remove(), 2000)
+	}
 }
