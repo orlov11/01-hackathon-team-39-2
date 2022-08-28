@@ -52,5 +52,8 @@ export class TimerModule extends Module {
         this.finalBlock.className = 'final-block'
         this.finalBlock.textContent = 'Таймер успешно завершил работу'
         document.body.append(this.finalBlock)
+        setTimeout(() => {
+            this.finalBlock.classList.add('hide')
+        }, 2000)
     }
 }

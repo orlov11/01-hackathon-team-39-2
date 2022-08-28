@@ -7,5 +7,5 @@ export function checkInput(input) {
             input = +prompt('Введите число больше нуля:')
         }
     }
-    return +input
+    return input
 }
